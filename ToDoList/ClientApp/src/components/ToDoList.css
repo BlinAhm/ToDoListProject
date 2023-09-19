@@ -1,0 +1,49 @@
+﻿.list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+    .list-container .tabs {
+        background: red;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+        .list-container .tabs .tab {
+            margin-right: 8px;
+            padding: 4px 10px;
+            border: solid 2px black;
+            border-radius: 4px 4px 0px 0px;
+        }
+
+        .list-container .tabs .add {
+            background: white;
+        }
+
+    .list-container .list-items {
+        display: flex;
+        padding: 10px;
+        flex-direction: column;
+        background: white;
+        border: solid 1px black;
+    }
+    .list-container .list-items .date {
+        width: max-content;
+        padding-inline: 6px;
+        border-bottom: solid 1px gray;
+    }   
+    .list-container .list-items .list-body {
+        padding-top:5px;
+        text-decoration: none;
+        list-style: none;
+        width: 98%;
+        border: solid 1px black;
+    }
+        .list-container .list-items .list-body .item{
+            display: flex;
+            justify-content: space-between;
+        }
+        .list-container .list-items .list-body .item div{
+            display: flex;
+        }
