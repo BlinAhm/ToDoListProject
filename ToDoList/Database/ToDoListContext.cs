@@ -31,12 +31,13 @@ namespace ToDoList.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TodoList>().ToTable("TodoList");
+            modelBuilder.Entity<Item>().HasKey(x => x.Id);
             modelBuilder.Entity<Item>().ToTable("Item");
-        
+
             modelBuilder.Entity<Item>()
-                .HasOne(e=>e.TodoList)
-                .WithMany(e=>e.Items)
-                .HasForeignKey(e=>e.Id);
+                .HasOne(e => e.TodoList)
+                .WithMany(e => e.Items)
+                .HasForeignKey(e => e.TodoListId);
         }
     }
 }
