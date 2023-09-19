@@ -78,6 +78,7 @@ namespace ToDoList.Controllers
             if (item == null) { return StatusCode(StatusCodes.Status404NotFound); }
 
             item.Description = updateModel.Description;
+            item.IsComplete = updateModel.IsComplete;
             _context.SaveChanges();
             return Ok();
         }
