@@ -31,28 +31,31 @@ const ToDoList = () => {
                 <div id="dueDate" className="date"> Due date: </div>
 
                 <div className="list-body">
-                    {items?.map((key) => (
-                        <li key={key.id} className="item">
-                            <div>
-                                <input id={"check-" + key.id} checked={key.isComplete} style={key.isComplete ? { textDecoration: "line-through" } : { textDecoration: "none" }} type="checkbox" onClick={() => {
-                                    boxChecked(key.id)
-                                }} />
-                                <p id={"descr-" + key.id} contentEditable={false} >{key.description}</p>
-                            </div>
-                            <div className="buttons">
-                                <i id={"save-" + key.id} style={{ display: "none" }} onClick={() => {
-                                    saveChanges(key.id);
-                                }} className="bi bi-check-circle"></i>
-                                <i id={"edit-" + key.id} className="bi bi-pen" onClick={() => {
-                                    editItem(key.id);
-                                }}></i>
-                                <i id={"del-" + key.id} onClick={() => {
-                                    document.getElementById("delete-modal").style.display = "block";
-                                    document.getElementById("deleteItemId").innerHTML = key.id;
-                                }} className="bi bi-trash"></i>
-                            </div>
-                        </li>
-                    )) ?? ""}
+                    <ul className="ul-main">
+                        {items?.map((key) => (
+                            <li id={"li-" + key.id} key={key.id} className="item">
+                                <div>
+                                    <input id={"check-" + key.id} defaultChecked={key.isComplete} type="checkbox" onClick={() => {
+                                        boxChecked(key.id)
+                                    }} />
+                                    <p id={"descr-" + key.id} style={key.isComplete ? { textDecoration: "line-through" } : { textDecoration: "none" }}
+                                        suppressContentEditableWarning={true} contentEditable={false} >{key.description}</p>
+                                </div>
+                                <div className="buttons">
+                                    <i id={"save-" + key.id} style={{ display: "none" }} onClick={() => {
+                                        saveChanges(key.id);
+                                    }} className="bi bi-check-circle"></i>
+                                    <i id={"edit-" + key.id} className="bi bi-pen" onClick={() => {
+                                        editItem(key.id);
+                                    }}></i>
+                                    <i id={"del-" + key.id} onClick={() => {
+                                        document.getElementById("delete-modal").style.display = "block";
+                                        document.getElementById("deleteItemId").innerHTML = key.id;
+                                    }} className="bi bi-trash"></i>
+                                </div>
+                            </li>
+                        )) ?? ""}
+                    </ul>
                     {checkForListId()}
 
                 </div>
@@ -88,7 +91,7 @@ const ToDoList = () => {
         if (box.checked == true) {
             text.style.textDecoration = "line-through";
             updateChecked(true, id, descr);
-            console.log(id + text)
+
         } else {
             text.style.textDecoration = "none";
             updateChecked(false, id, descr);
@@ -116,7 +119,7 @@ const ToDoList = () => {
         arr.forEach((e) => {
             e.style.background = "linear-gradient(to right, #d3d3d3, white)";
             e.style.borderColor = "gray";
-            e.style.color = "black"
+            e.style.color = "black";
         });
 
         let mainTab = document.getElementById("tab" + id);
@@ -283,7 +286,8 @@ const DeleteItem = () => {
         fetch("http://localhost:5212/api/ToDoList/DeleteItem/" + id, {
             method: "DELETE"
         }).then(function (response) {
-            window.location.href = "http://localhost:44411";
+            document.getElementById("li-"+id).style.display = "none";
+            document.getElementById("delete-modal").style.display = "none";
         })
     }
 }
