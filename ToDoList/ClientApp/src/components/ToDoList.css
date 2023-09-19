@@ -12,7 +12,8 @@
         .list-container .tabs .tab {
             margin-right: 8px;
             padding: 2px 16px;
-            background: linear-gradient(to right, #d3d3d3, white) padding-box, linear-gradient(to right, #0751e9, #1a60ee, #266af5) border-box;
+            background: linear-gradient(to right, #d3d3d3, white) padding-box, gray border-box;
+            border: 1px solid transparent;
             border-bottom: none;
             border-radius: 8px 8px 0px 0px;
             cursor: pointer;
@@ -24,7 +25,9 @@
             }
 
         .list-container .tabs .add {
-            background: white;
+            background: linear-gradient(to right, #d3d3d3, white) padding-box, gray border-box;
+            border: 1px solid transparent;
+            border-bottom: none;
         }
 
     .list-container .list-items {
@@ -32,7 +35,8 @@
         padding: 10px;
         flex-direction: column;
         background: linear-gradient(to right, #d3d3d3, white) padding-box, linear-gradient(to right, #0751e9, #1a60ee, #266af5) border-box;
-        border: solid 1px black;
+        border: 3px solid transparent;
+        border-radius: 0px 8px 8px 8px;
     }
 
         .list-container .list-items .date {
@@ -126,3 +130,54 @@
         top: 0;
         z-index: 1;
     }
+
+    .list-container .deleteItem-modal {
+        width: 28%;
+        margin: 14% auto;
+        background: linear-gradient(to right, #d3d3d3, white) padding-box, linear-gradient(to right, #0751e9, #1a60ee, #266af5) border-box;
+        padding: 30px;
+        border: 3px solid transparent;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        text-align: center;
+    }
+
+        .list-container .deleteItem-modal h1 {
+            font-size: 34px;
+        }
+
+        .list-container .deleteItem-modal .button-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+            .list-container .deleteItem-modal .button-container .del-btn {
+                height: 40px;
+                width: 120px;
+                border: solid 1px gray;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: white;
+                border: 1px solid darkgray;
+                cursor: pointer;
+                font-size: 18px;
+            }
+
+            .list-container .deleteItem-modal .button-container .submitDel {
+                background: crimson;
+                border: 1px solid darkgray;
+                color: white;
+            }
+
+            .list-container .deleteItem-modal .button-container .del-btn:hover {
+                background: #d5d5d5;
+            }
+
+            .list-container .deleteItem-modal .button-container .submitDel:hover {
+                background: #c1092e;
+            }

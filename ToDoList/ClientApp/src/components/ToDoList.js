@@ -35,10 +35,12 @@ const ToDoList = () => {
                         <li key={key.id} className="item">
                             <div>
                                 <input type="checkbox" />
-                                <p>{key.description}</p>
+                                <p id={"descr-"+key.id} contentEditable={false} >{key.description}</p>
                             </div>
                             <div className="buttons">
-                                <i className="bi bi-pen"></i>
+                                <i className="bi bi-pen" onClick={() => {
+                                    document.getElementById("descr-" + key.id).setAttribute("contentEditable", true);
+                                }}></i>
                                 <i className="bi bi-trash"></i>
                             </div>
                         </li>
@@ -47,23 +49,23 @@ const ToDoList = () => {
             </div>
 
             <AddList />
+            <DeleteItem />
         </div>
     );
 
     function changeColor(id) {
-
-
-
         let tabs = document.getElementsByClassName("tab");
         let arr = [...tabs];
         arr.forEach((e) => {
             e.style.background = "linear-gradient(to right, #d3d3d3, white)";
+            e.style.borderColor = "gray";
             e.style.color = "black"
         });
 
-        var mainTab = document.getElementById("tab" + id);
+        let mainTab = document.getElementById("tab" + id);
         console.log(id);
         mainTab.style.background = "linear-gradient(to right, #0751e9, #1a60ee, #266af5)";
+        mainTab.style.borderColor = "#0751e9";
         mainTab.style.color = "white";
     }
 
@@ -99,14 +101,31 @@ const AddList = () => {
 
                 <h1>Add List:</h1>
                 <label>Title:</label>
-                <input type="text" />
+                <input id="title-add" type="text" />
                 <label>Due date:</label>
-                <input type="date" />
+                <input id="date-add" type="date" />
 
                 <input className="submit-list" type="submit" value="Save" />
             </div>
         </div>
     );
 }
+
+const DeleteItem = () => {
+    return (
+        <div id="delete-modal" style={{ display: "none" }} className="modal-background">
+            <div className="deleteItem-modal">
+                <h1>Are you sure you want to delete this item?</h1>
+                <div className="button-container">
+                    <div className="del-btn" onClick={() => {
+                        document.getElementById("delete-modal").style.display = "none";
+                    }}>Cancel</div>
+                    <input className="del-btn submitDel" type="submit" value="Delete" />
+                </div>
+            </div>
+        </div>
+    );
+}
+
 
 export default ToDoList;

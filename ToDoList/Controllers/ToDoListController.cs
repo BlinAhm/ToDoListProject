@@ -54,5 +54,27 @@ namespace ToDoList.Controllers
             _context.Items.Add(item);
             _context.SaveChanges();
         }
+
+        [HttpDelete]
+        [Route("DeleteItem/{id}")]
+        public void DeleteItem(int id)
+        {
+            var item = _context.Items.Where(x => x.Id == id).FirstOrDefault();
+            if (item == null) { return; }
+
+            _context.Items.Remove(item);
+            _context.SaveChanges();
+        }
+
+        [HttpPut]
+        [Route("UpdateItem")]
+        public void UpdateItem(Item updateModel)
+        {
+            var item = _context.Items.Where(x => x.Id == updateModel.Id).FirstOrDefault();
+            if (item == null) { return; }
+
+            item.Description = updateModel.Description;
+            _context.SaveChanges();
+        }
     }
 }
