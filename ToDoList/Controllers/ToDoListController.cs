@@ -39,42 +39,47 @@ namespace ToDoList.Controllers
 
         [HttpPost]
         [Route("AddList")]
-        public void AddList([FromForm] TodoList todoList)
+        public IActionResult AddList([FromBody]TodoList todoList)
         {
             _context.TodoLists.Add(todoList);
             _context.SaveChanges();
+
+            return Ok(todoList);
         }
 
         [HttpPost]
         [Route("AddItem")]
-        public void AddItem([FromForm] Item item)
+        public IActionResult AddItem([FromBody] Item item)
         {
             item.TodoList = _context.TodoLists.Where(x => x.Id == item.TodoListId).FirstOrDefault();
 
             _context.Items.Add(item);
             _context.SaveChanges();
+            return Ok(item);
         }
 
         [HttpDelete]
         [Route("DeleteItem/{id}")]
-        public void DeleteItem(int id)
+        public IActionResult DeleteItem(int id)
         {
             var item = _context.Items.Where(x => x.Id == id).FirstOrDefault();
-            if (item == null) { return; }
+            if (item == null) { return StatusCode(StatusCodes.Status404NotFound); }
 
             _context.Items.Remove(item);
             _context.SaveChanges();
+            return Ok();
         }
 
         [HttpPut]
         [Route("UpdateItem")]
-        public void UpdateItem(Item updateModel)
+        public IActionResult UpdateItem([FromBody]Item updateModel)
         {
             var item = _context.Items.Where(x => x.Id == updateModel.Id).FirstOrDefault();
-            if (item == null) { return; }
+            if (item == null) { return StatusCode(StatusCodes.Status404NotFound); }
 
             item.Description = updateModel.Description;
             _context.SaveChanges();
+            return Ok();
         }
     }
 }
